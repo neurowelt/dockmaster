@@ -53,3 +53,5 @@ Based on your configuration the script will:
 * Create environmental arguments for your build
 * Build images
 * Run containers and delete them when finished (or run as deamons and exit providing their IDs)
+
+Check out the [provided example](./example/) to get a better understanding how to set up the configuration and use this tool.
