@@ -31,13 +31,13 @@ delete_containers=true
 delete_images=true
 run_as_daemon=false
 
-#######################################
+###
 # Config reading function
 # Arguments:
 #   Path to a config file
 # Returns:
 #   Exit 1 if file is not .ini, assign vars otherwise
-#######################################
+###
 read_config() {
     local config_file="$1"
     local selection=""
@@ -104,6 +104,9 @@ read_config() {
                         "run_as_daemon")
                             run_as_daemon=$value
                             ;;
+                        "remove_existing")
+                            remove_existing=$value
+                            ;;
                     esac
                     ;;
             esac
@@ -111,13 +114,13 @@ read_config() {
     done < "$config_file"
 }
 
-#######################################
+###
 # Create Docker build command
 # Arguments:
 #   Image name and Dockerfile path
 # Returns:
 #   `docker build` command, exit 1 without args
-#######################################
+###
 create_docker_build_cmd() {
     local image_name="$1"
     local dockerfile="$2"
@@ -142,13 +145,13 @@ create_docker_build_cmd() {
 }
 
 
-#######################################
+###
 # Create Docker run command
 # Arguments:
 #   Image & container names, CMD script path, device, run as daemon
 # Returns:
 #   `docker run` command, exit 1 without args
-#######################################
+###
 create_docker_run_cmd() {
     local image_name="$1"
     local container_name="$2"
@@ -177,13 +180,13 @@ create_docker_run_cmd() {
     echo "$docker_command"
 }
 
-#######################################
+###
 # Check if given file exists
 # Arguments:
 #   File path
 # Returns:
 #   Exit 1 if file does not exist
-#######################################
+###
 check_file_exists() {
     local file=$1
     echo "Checking if file $file exists..."
@@ -209,6 +212,42 @@ if [[ -z $container_names ]] ; then
     echo "container_names is a required parameter - cancelling process."
     exit 1
 fi
+
+# Check if images already exist
+for image_name in "${image_names[@]}"; do
+    check_image=$(docker image inspect $image_name 2> /dev/null)
+    if [[ $? -eq 0 ]]; then
+        echo "Image $image_name exists."
+        if [[ $remove_existing == true ]]; then
+            echo "Removing..."
+            try_removing=$(docker rmi $image_name 2> /dev/null)
+            if [[ $? -eq 1 ]]; then
+                echo "Could not remove image: Error: $try_removing"
+            fi
+        else
+            echo "Stopping the process..."
+            echo "Please manually remove the image or add a tag to your image name."
+        fi
+    fi
+done
+
+# Check if containers already exist
+for container_name in "${container_names[@]}"; do
+    check_container=$(docker container inspect $container_name 2> /dev/null)
+    if [[ $? -eq 0 ]]; then
+        echo "Container $container_name exists."
+        if [[ $remove_existing == true ]]; then
+            echo "Removing..."
+            try_removing=$(docker rm $container_name 2> /dev/null)
+            if [[ $? -eq 1 ]]; then
+                echo "Could not remove container. Error: $try_removing"
+            fi
+        else
+            echo "Stopping the process..."
+            echo "Please manually remove the container."
+        fi
+    fi
+done
 
 # If devices are provided, check if they exist
 if [[ ! -z $devices ]] ; then
