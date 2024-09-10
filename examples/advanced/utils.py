@@ -11,4 +11,4 @@ def hash_func(data: str) -> str:
     Returns:
         str: Hex value of a hashed data string.
     """
-    return hashlib.sha256(bytes(f"{data}")).hexdigest()
+    return hashlib.sha256(f"{data}".encode()).hexdigest()
