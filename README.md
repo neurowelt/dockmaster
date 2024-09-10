@@ -22,18 +22,22 @@ Before running the `dockmaster.sh` you need to prepare a configuration file, whi
 <br>
 <div align="center">
 
-| Section    | Parameter         | Description |
-|:----------:|:-----------------:|:-----------:|
-| `env`      | -                 | Environmental variables passed to the build. Define as many as needed; all will be available in your container's environment. |
-| `execution`| `devices`         | List of GPU devices to run the container on. Leave empty for CPU, use `all` for all available devices. |
-|            | `cmd_scripts`     | List of scripts to execute in the container. Optional if your Dockerfiles already contain scripts to run. |
-| `docker`   | `dockerfiles`     | List of paths to Dockerfiles you want to build. |
-|            | `image_names`     | List of names for the images that will be built. |
-|            | `container_names` | List of names for the containers that will be run. |
-|            | `run_containers`  | Create containers from images and run them. |
+| Section    | Parameter          | Description |
+|:----------:|:------------------:|:-----------:|
+| `env`      | -                  | Environmental variables passed to the build. Define as many as needed; all will be available in your container's environment. |
+| `execution`| `devices`          | List of GPU devices to run the container on. Leave empty for CPU, use `all` for all available devices. |
+|            | `cmd_scripts`      | List of scripts to execute in the container. Optional if your Dockerfiles already contain scripts to run. |
+| `docker`   | `dockerfiles`      | List of paths to Dockerfiles you want to build. |
+|            | `image_names`      | List of names for the images that will be built. |
+|            | `container_names`  | List of names for the containers that will be run. |
+|            | `expose_ports`     | List of ports to expose for each container. |
+|            | `run_containers`   | Create containers from images and run them. |
 |            | `delete_containers`| Delete containers after they finish running. |
-|            | `delete_images`   | Delete images after containers finish running. |
-|            | `run_as_daemon`   | Run containers as daemons (disables `delete_containers` and `delete_images`). |
+|            | `delete_images`    | Delete images after containers finish running. |
+|            | `run_as_daemon`    | Run containers as daemons (disables `delete_containers` and `delete_images`). |
+|            | `remove_existing`  | If images or containers with the same name were found, remove them. |
+
+remove_existing
 
 </div>
 <br>
