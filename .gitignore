@@ -1,2 +1,7 @@
+# Development
+test.*
+__pycache__/*
+*.py[cod]
+
 # General
 .DS_Store
