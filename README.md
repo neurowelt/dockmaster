@@ -54,4 +54,4 @@ Based on your configuration the script will:
 * Build images
 * Run containers and delete them when finished (or run as deamons and exit providing their IDs)
 
-Check out the [provided example](./example/) to get a better understanding how to set up the configuration and use this tool.
+Check out the [provided examples](./examples/) to get a better understanding how to set up the configuration and use this tool.
