@@ -11,7 +11,7 @@ To run each example please run the following commands from the main repository d
     bash ../../dockmaster.sh -c basic.ini
     ```
 
-* `advanced` exzample - training & inference services ran as two separate containers in daemon mode:
+* `advanced` example - training & inference services ran as two separate containers in daemon mode:
 
     ```bash
     # Change directory
@@ -33,5 +33,5 @@ To run each example please run the following commands from the main repository d
     docker rmi example_img_2
     ```
 
-    > [!NOTE]
-    > `check_containers.py` requires only the basic Python libraries (`requests` and `hashlib`)
+> [!NOTE]
+> `check_containers.py` requires only the basic Python libraries (`requests` and `hashlib`)
