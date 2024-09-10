@@ -1,7 +1,7 @@
-import hashlib
-
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
+
+from .utils import hash_func
 
 
 router = APIRouter()
@@ -10,5 +10,5 @@ router = APIRouter()
 async def inference() -> JSONResponse:
     # Perform inference here
     return JSONResponse(
-        content={'status': 'ok', 'result': hashlib.sha256(b"inference").hexdigest()}
+        content={'status': 'ok', 'result': hash_func('inference')}
     )
