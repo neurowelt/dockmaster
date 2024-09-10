@@ -37,8 +37,6 @@ Before running the `dockmaster.sh` you need to prepare a configuration file, whi
 |            | `run_as_daemon`    | Run containers as daemons (disables `delete_containers` and `delete_images`). |
 |            | `remove_existing`  | If images or containers with the same name were found, remove them. |
 
-remove_existing
-
 </div>
 <br>
 
