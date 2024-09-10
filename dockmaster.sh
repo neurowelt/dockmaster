@@ -260,9 +260,10 @@ done
 
 # Building Docker images
 echo "Starting Docker bulding process..."
-for i in "${dockerfiles[@]}" ; do
-    docker_command=$(create_docker_build_cmd "${image_names[$i]}" "${dockerfiles[$i]}")
-    echo "Building Docker image ${image_names[$i]} from Dockerfile ${dockerfiles[$i]}..."
+typeset -i nr
+for ((nr=0;nr<${#dockerfiles[@]};nr++)) ; do
+    docker_command=$(create_docker_build_cmd "${image_names[$nr]}" "${dockerfiles[$nr]}")
+    echo "Building Docker image ${image_names[$nr]} from Dockerfile ${dockerfiles[$nr]}..."
     echo "Running command: $docker_command"
     $docker_command
 done
@@ -277,18 +278,19 @@ fi
 
 # Running Docker containers
 echo "Starting Docker running process..."
-for i in "${container_names[@]}" ; do
+typeset -i nr
+for ((nr=0;nr<${#container_names[@]};nr++)) ; do
     if [[ $run_containers = true ]] ; then
-        docker_command=$(create_docker_run_cmd "${image_names[$i]}" "${container_names[$i]}" "${cmd_scripts[$i]}" "${devices[$i]}" "$run_as_daemon")
-        echo "Running Docker container ${container_names[$i]}..."
+        docker_command=$(create_docker_run_cmd "${image_names[$nr]}" "${container_names[$nr]}" "${cmd_scripts[$nr]}" "${devices[$nr]}" "$run_as_daemon")
+        echo "Running Docker container ${container_names[$nr]}..."
         $docker_command
     fi
     if [[ $delete_containers = true ]] ; then
-        echo "Deleting Docker container ${container_names[$i]}..."
-        docker rm "${container_names[$i]}"
+        echo "Deleting Docker container ${container_names[$nr]}..."
+        docker rm "${container_names[$nr]}"
         if [[ $delete_images = true ]] ; then
-            echo "Deleting Docker image ${image_names[$i]}..."
-            docker rmi "${image_names[$i]}"
+            echo "Deleting Docker image ${image_names[$nr]}..."
+            docker rmi "${image_names[$nr]}"
         fi
     fi
 done
