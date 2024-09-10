@@ -1,6 +1,7 @@
+import json
 from requests import Session
 
-from .utils import hash_func
+from utils import hash_func
 
 
 if __name__ == "__main__":
@@ -23,9 +24,12 @@ if __name__ == "__main__":
             f"Failed to retrieve response - error code {inferece_response.status_code}"
         assert training_response.status_code == 200, \
             f"Failed to retrieve response - error code {training_response.status_code}"
+        
+        inference_content = json.loads(inferece_response.content)['result']
+        training_content = json.loads(training_response.content)['result']
 
-        assert inferece_response.content['result'] == hash_func('inference'), \
+        assert inference_content == hash_func('inference'), \
             'Inference should return the same value as provided hash.'
-        assert training_response.content['result'] == hash_func('training'), \
+        assert training_content == hash_func('training'), \
             'Training should return the same value as provided hash.'
         

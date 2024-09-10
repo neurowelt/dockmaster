@@ -1,10 +1,8 @@
-import os
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .inference import router as inference_router
-from .training import router as training_router
+from inference import router as inference_router
+from training import router as training_router
 
 
 def create_app(is_training: bool) -> FastAPI:
@@ -31,8 +29,10 @@ def create_app(is_training: bool) -> FastAPI:
     )
 
     if is_training:
+        print('Running training...')
         app.include_router(training_router)
     else:
+        print('Running inference...')
         app.include_router(inference_router)
 
     return app

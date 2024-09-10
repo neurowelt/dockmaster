@@ -1,8 +1,8 @@
 import os
 
-from .build import create_app
+from build import create_app
 
-TRAINING = os.environ.get('IS_TRAINING', 0) == 1
+TRAINING = os.environ.get('IS_TRAINING', '0') == '1'
 
 
-app = create_app()
+app = create_app(TRAINING)

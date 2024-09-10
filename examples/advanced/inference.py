@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from .utils import hash_func
+from utils import hash_func
 
 
 router = APIRouter()
