@@ -55,3 +55,7 @@ Based on your configuration the script will:
 * Run containers and delete them when finished (or run as deamons and exit providing their IDs)
 
 Check out the [provided examples](./examples/) to get a better understanding how to set up the configuration and use this tool.
+
+## Contributing
+
+If you are interested in joining the effort to make this repository better, feel encouraged to open [an issue](https://github.com/neurowelt/dockmaster/issues) or create your own [pull request](https://github.com/neurowelt/dockmaster/pulls)!
