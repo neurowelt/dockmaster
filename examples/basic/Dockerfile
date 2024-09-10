@@ -1,4 +1,4 @@
-# source: https://github.com/tiangolo/uvicorn-gunicorn-docker/blob/master/docker-images/python3.8-slim.dockerfile
+# source: https://github.com/tiangolo/uvicorn-gunicorn-docker/blob/master/docker-images/python3.10-slim.dockerfile
 FROM python:3.10-slim
 
 COPY . .
