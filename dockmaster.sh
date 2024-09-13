@@ -2,6 +2,8 @@
 #
 # Build & run Docker containers based on a config file
 
+set -euo pipefail
+
 # Get config file to run the master
 while [ $# -gt 0 ] ; do
     case $1 in
