@@ -11,8 +11,9 @@ This project is a simple bash wrapper around the `docker` command line tool. It 
 Before running `dockmaster.sh` first confirm that you have `docker` installed:
 
 ```bash
-docker --version
+docker info
 ```
+
 If you do not have `docker` installed, please follow the instructions [here](https://docs.docker.com/get-docker/).
 
 ## Configuration
